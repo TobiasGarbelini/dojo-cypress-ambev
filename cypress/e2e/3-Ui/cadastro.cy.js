@@ -3,8 +3,6 @@
 
 const faker = require('faker-br')
 
-const email = faker.internet.email()
-
 context('Cadastro', () => {
     beforeEach(() =>{
         cy.visit('/cadastrar')
@@ -16,7 +14,7 @@ context('Cadastro', () => {
         cy.screenshot()
     });
 
-
+    const name = faker.name.firstName() + faker.name.lastName()
     const email = faker.internet.email()
 
     it('Cadastro com sucesso', () => {
@@ -24,7 +22,7 @@ context('Cadastro', () => {
 
         cy.get('[data-test="register-login"]').should('exist')
         cy.get('.large').should('exist').and('contain', 'Cadastrar')
-        cy.get('[data-test="register-name"]').type('Tobias')
+        cy.get('[data-test="register-name"]').type(name)
         cy.get('[data-test="register-email"]').type(email)
         cy.get('[data-test="register-password"]').type('123456')
         cy.get('[data-test="register-password2"]').type('123456')
