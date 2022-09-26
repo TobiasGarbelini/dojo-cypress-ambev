@@ -51,3 +51,17 @@ Cypress.Commands.add('cadastro', () => {
         cy.get('[data-test="profile-submit"]').click()
     })
 })
+
+Cypress.Commands.add("gerarToken", (email,senha) => {
+    cy.request({
+        method: 'Post',
+        url: '/api/auth',
+        body: {
+            "email": email,
+            "password": senha
+        }
+    }).then((response) => {
+        return response.body.jwt
+    })
+    
+})
